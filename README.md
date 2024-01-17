@@ -21,7 +21,7 @@ cd backend
 # Install Dependencies
 npm install
 
-# Set Up Environment Variables
+# Set Up Environment Variables (this is already setup with the code; make changes if necessary)
 echo "PORT=5000
 MONGO_URI=mongodb://localhost:27017/surveydb
 JWT_SECRET=<your_jwt_secret>" > .env
@@ -39,14 +39,12 @@ The server will start running on http://localhost:5000.
 Follow these steps to set up the frontend client:
 
 ```bash
-cd frontend
-or
 cd .. (if you are in ./backend)
 
 # Install Dependencies
 npm install
 
-# Set Up Environment Variables
+# Set Up Environment Variables (this is already setup with the code; make changes if necessary)
 echo "REACT_APP_API_URL=http://localhost:5000" > .env
 
 # Start the Development Server
