@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+# Survey Form Application Setup Guide
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This README provides the necessary steps to set up and run the survey form application on your local development environment. It includes instructions for both the backend (Node.js/Express) and frontend (React) components.
 
-## Available Scripts
+## Prerequisites
 
-In the project directory, you can run:
+Before you start, make sure you have the following installed on your system:
+- Node.js (version 14 or higher)
+- npm (comes bundled with Node.js)
+- MongoDB (version 4.0 or higher)
 
-### `npm start`
+## Backend Setup
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Follow these steps to set up the backend server:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+# Clone the Backend Repository
+git clone https://github.com/rohankbd/survey-form.git
+cd backend
 
-### `npm test`
+# Install Dependencies
+npm install
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Set Up Environment Variables
+echo "PORT=5000
+MONGO_URI=mongodb://localhost:27017/surveydb
+JWT_SECRET=<your_jwt_secret>" > .env
 
-### `npm run build`
+# Seed the Database
+npm run seed
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Start the Server
+nodemon index.js
+```
+The server will start running on http://localhost:5000.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Frontend Setup
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Follow these steps to set up the frontend client:
 
-### `npm run eject`
+```bash
+cd frontend
+or
+cd .. (if you are in ./backend)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Install Dependencies
+npm install
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Set Up Environment Variables
+echo "REACT_APP_API_URL=http://localhost:5000" > .env
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Start the Development Server
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The application will open in your browser at http://localhost:3000.
 
-## Learn More
+### Routes
+/ -> Survey Form
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+/admin-login -> Admin Login page
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+/admin -> View Surveys (Admin only)
 
-### Code Splitting
+### Endpoints
+/survey - POST, GET
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+/login - POST
 
-### Analyzing the Bundle Size
+/surveys - GET
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Additional Notes
+### Design Decisions
+ Backend Structure: Adopted the MVC architecture for clear separation of concerns.
 
-### Making a Progressive Web App
+ State Management: Utilized React's built-in state management to keep the application simple and manageable.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+ Styling Approach: Employed CSS modules and Bootstrap to provide component-scoped styling and prevent style conflicts.
 
-### Advanced Configuration
+### Challenges Encountered
+CORS Issues: Configuring CORS was initially challenging but was resolved by correctly setting up the CORS middleware in the backend.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Database Seeding: Creating an idempotent seeding process required careful scripting to avoid inserting duplicate data.
 
-### Deployment
+Deployment Preparation: Preparing the application for deployment involved setting environment variables and ensuring the frontend's production build is correctly served by the backend.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Conclusion
+By following the above instructions, you should be able to run the survey form application locally. If you run into any issues, please review the error messages in the console and ensure all prerequisites are properly installed and configured.
