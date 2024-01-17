@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('../models/User');
 
-mongoose.connect('mongodb://localhost:27017/surveydb', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+mongoose.connect('mongodb://localhost:27017/surveydb');
 
 const admin = new User({
   username: 'admin',
