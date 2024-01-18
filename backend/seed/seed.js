@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const User = require('../models/User');
+require('dotenv').config();
 
-mongoose.connect('mongodb://localhost:27017/surveydb');
+mongoose.connect(process.env.MONGO_URI);
 
 const admin = new User({
   username: 'admin',
